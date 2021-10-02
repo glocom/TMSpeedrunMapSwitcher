@@ -6,12 +6,12 @@ category = "Speedrunning"
 blocks = [ "Speedrunning_Test" ]
 
 siteid = 87
-version = "1.7.1"
+version = "1.7.2"
 
 perms = "paid"
 
 [game]
-min_version = "2020-12-25"
+min_version = "2021-10-01"
 
 [script]
 imports = [ "Icons.as", "Formatting.as", "Permissions.as" ]

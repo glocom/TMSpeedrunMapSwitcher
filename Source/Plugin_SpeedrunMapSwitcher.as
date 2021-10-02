@@ -505,7 +505,6 @@ void FetchCampaign(string campaignId) {
 			newmap.silver_score = maps["days"][i]["map"]["silverScore"];
 			newmap.bronze_score = maps["days"][i]["map"]["bronzeScore"];
 			newmap.collection_name = maps["days"][i]["map"]["collectionName"];
-			newmap.environment = maps["days"][i]["map"]["environment"];
 			newmap.filename = maps["days"][i]["map"]["filename"];
 			newmap.is_playable = maps["days"][i]["map"]["isPlayable"];
 			newmap.map_id = maps["days"][i]["map"]["mapId"];
@@ -540,7 +539,6 @@ void FetchCampaign(string campaignId) {
 			newmap.silver_score = maps["playlist"][i]["silverScore"];
 			newmap.bronze_score = maps["playlist"][i]["bronzeScore"];
 			newmap.collection_name = maps["playlist"][i]["collectionName"];
-			newmap.environment = maps["playlist"][i]["environment"];
 			newmap.filename = maps["playlist"][i]["filename"];
 			newmap.is_playable = maps["playlist"][i]["isPlayable"];
 			newmap.map_id = maps["playlist"][i]["mapId"];

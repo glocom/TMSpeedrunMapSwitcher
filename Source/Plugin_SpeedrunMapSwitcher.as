@@ -23,7 +23,8 @@ string summer_2020_campaign_id = "130";
 string fall_2020_campaign_id = "4791";
 string winter_2021_campaign_id = "6151";
 string spring_2021_campaign_id = "8449";
-string summer_2021_campaign_id = "12345";
+string summer_2021_campaign_id = "11612";
+string fall_2021_campaign_id = "16056";
 string url = "";
 string selected_mode = "";
 string expected_map_uid = "";
@@ -203,7 +204,20 @@ void RenderInterface() {
 
 		if(Permissions::PlayPastOfficialQuarterlyCampaign()) {
 			if (UI::BeginTabItem(Icons::Trophy + " All Seasons")) {
-				UI::BeginChild("All Seasons");
+				UI::BeginChild("All Seasons");				
+				if (UI::Button("2021")) {
+					print("Starting All Seasons 2021 speedrun");	
+					current_mode = CampaignMode::Season;
+					previous_campaign.campaign_ids = current_campaign.campaign_ids;			
+					current_campaign.campaign_ids = {};
+					current_campaign.campaign_ids.InsertLast(winter_2021_campaign_id);	
+					current_campaign.campaign_ids.InsertLast(spring_2021_campaign_id);
+					current_campaign.campaign_ids.InsertLast(summer_2021_campaign_id);	
+					current_campaign.campaign_ids.InsertLast(fall_2021_campaign_id);				
+					ClosePauseMenu();				
+					startnew(StartCampaign);
+				}
+				UI::SameLine();
 				if (UI::Button("2020")) {
 					print("Starting All Seasons 2020 speedrun");	
 					current_mode = CampaignMode::Season;
@@ -355,8 +369,11 @@ void DrawAllTotdsButtons() {
 	auto diff = current_month - release_month + (12 * (current_year - release_year));
 	int64 current_epoch = Time::get_Stamp() - (Text::ParseInt(Time::FormatString("%m"))*2629743) - (Text::ParseInt(Time::FormatString("%d"))*86400);
 	
-	bool release_year = false;
-	for(int i = 0; i < diff; i+=12) {	
+	bool is_release_year = false;
+	for(int i = 0; i < diff; i+=12) {			
+		if(year_counter < release_year) {
+			break;
+		}
 		if(year_counter % 5 != 0) 
 			UI::SameLine();
 		if (UI::Button(Time::FormatString("%Y", current_epoch))) {
@@ -366,11 +383,11 @@ void DrawAllTotdsButtons() {
 			current_campaign.campaign_ids = {};
 
 			int january_of_selected_year = 12*(current_year - year_counter) + current_month - 1;
-			if(year_counter == 2020) {
+			if(year_counter == release_year) {
 				january_of_selected_year = diff;
-				release_year = true;
+				is_release_year = true;
 			}
-			if(release_year) {
+			if(is_release_year) {
 				for(int j = january_of_selected_year; j > january_of_selected_year - 6; j--) {
 					current_campaign.campaign_ids.InsertLast("" + j);			
 				}

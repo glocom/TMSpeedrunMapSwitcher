@@ -315,6 +315,8 @@ void DrawTotdButtons() {
 	int64 current_epoch = Time::get_Stamp() - (Text::ParseInt(Time::FormatString("%d"))*86400);
 	
 	current_month--; //subtract 1 month, because we can't speedrun the current TOTD month
+	if (current_month == 0) current_month = 12;
+
 	UI::Text("" + current_year);
 	for(int i = diff; i > 0; i--) {		
 		if(current_month % 6 != 0) { 
